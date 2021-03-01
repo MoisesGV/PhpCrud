@@ -1,5 +1,5 @@
 <?php
-require_once('models/conexion.php');
+require_once('conexion.php');
 
 class Crud extends Conexion{
     
@@ -85,7 +85,7 @@ class Crud extends Conexion{
     #ELIMINAR USUARIOS
     #---------------------------------------------
 
-    function  ElminarUsuarioModel($datos, $tabla){
+    function  EliminarUsuarioModel($datos, $tabla){
         $stmt = Conexion::Conectar()->prepare("DELETE FROM $tabla WHERE id = :id");
         $stmt->bindParam(":id", $datos, PDO::PARAM_INT);
 
@@ -102,7 +102,7 @@ class Crud extends Conexion{
     #INTENTOS USUARIOS
     #---------------------------------------------
 
-    function IntentosUsuarioModel($datos, $tabla){
+    /*function IntentosUsuarioModel($datos, $tabla){
         $stmt = Conexion::Conectar()->prepare("UPDATE $tabla SET intentos = :intentos WHERE nombre = :nombre");
         $stmt->bindParam(":intentos", $datos['actualizarIntentos'], PDO::PARAM_INT);
         $stmt->bindParam(":nombre", $datos['usuarioActual'], PDO::PARAM_STR);
@@ -113,6 +113,25 @@ class Crud extends Conexion{
         else{
             return "error";
         }
+        $stmt->close();
+    }
+    */
+
+    function ValidarUsuarioModel($datos, $tabla){
+        $stmt = Conexion::Conectar()->prepare("SELECT nombre FROM $tabla WHERE nombre = :nombre");
+        $stmt->bindParam(":nombre", $datos, PDO::PARAM_STR);
+        $stmt->execute();
+
+        return $stmt->fetch();
+        $stmt->close();
+    }
+
+    function ValidarEmailModel($datos, $tabla){
+        $stmt = Conexion::Conectar()->prepare("SELECT email FROM $tabla WHERE email = :email");
+        $stmt->bindParam(":email", $datos, PDO::PARAM_STR);
+        $stmt->execute();
+
+        return $stmt->fetch();
         $stmt->close();
     }
             

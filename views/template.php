@@ -61,7 +61,7 @@
 			margin:5px;
 		}
 
-		section form input#usuario{
+		section form input#usuario, input#usuarioEditar, input#usuarioIngreso{
 			text-transform: lowercase;
 		}
 
@@ -88,6 +88,7 @@
 			padding:10px;
 		}
 	</style>
+	<script src="views/js/jquery-3.1.1.min.js"></script>
 </head>
 <body>
 <header>
@@ -103,5 +104,7 @@
 ?>
 </section>
 <script src="views/js/validarRegistro.js"></script>
+<script src="views/js/validarIngreso.js"></script>
+<script src="views/js/validarEditar.js"></script>
 </body>
 </html>

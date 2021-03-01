@@ -130,7 +130,7 @@ class MvcController{
         foreach ($respuesta as $key => $value) {
             echo    '<tr>
 				    <td>'.$value["nombre"].'</td>
-				    <td>---------</td>
+				    <td>.....................</td>
 				    <td>'.$value["email"].'</td>
 				    <td><a href="index.php?action=editar&id='.$value["id"].'"><button>Editar</button></a></td>
 				    <td><a href="index.php?action=usuarios&idEliminar='.$value["id"].'"><button>Borrar</button></a></td>
@@ -147,10 +147,14 @@ class MvcController{
         $idEditar = $_GET['id'];
         $respuesta = Crud::EditarUsuarioModel($idEditar, 'usuarios');
 
-        echo '  <input type="hidden" value="'.$respuesta['id'].'" name="idEditar">
-                <input type="text" value="'.$respuesta['nombre'].'" name="usuarioEditar" required>
-                <input type="password" value="'.$respuesta['clave'].'" name="passwordEditar" required>
-                <input type="email" value="'.$respuesta['email'].'" name="emailEditar" required> ';
+        echo '  
+                <input type="hidden" value="'.$respuesta['id'].'" name="idEditar">
+                <span id="usuario"></span>
+                <input type="text" value="'.$respuesta['nombre'].'" name="usuarioEditar" id="usuarioEditar" required>
+                <span id="password"></span>
+                <input type="password" value="'.$respuesta['clave'].'" name="passwordEditar" id="passwordEditar" required>
+                <span id="email"></span>
+                <input type="email" value="'.$respuesta['email'].'" name="emailEditar" id="emailEditar" required> ';
     }
 
     #ACTUALIZAR USUARIOS
@@ -193,7 +197,7 @@ class MvcController{
        if( isset( $_GET['idEliminar'] )){
 
            $idController = $_GET['idEliminar'];
-           $respuesta = Crud::ElminarUsuarioModel($idController, 'usuarios');
+           $respuesta = Crud::EliminarUsuarioModel($idController, 'usuarios');
 
            if($respuesta == 'success'){
             header("location:usuarios");
@@ -203,6 +207,36 @@ class MvcController{
             echo "error";
         }
         }
+    }
+
+    #AJAX USUARIOS
+    #---------------------------------------------
+    function ValidarUsuarioController($validarUsuario){
+        $datos = $validarUsuario;
+
+        $respuesta = Crud::ValidarUsuarioModel($datos, 'usuarios');
+
+        if($respuesta){
+            echo 1;
+        }else{
+            echo 0;
+        }
+
+    }
+
+    #AJAX EMAIL
+    #---------------------------------------------
+    function ValidarEmailController($validarEmail){
+        $datos = $validarEmail;
+
+        $respuesta = Crud::ValidarEmailModel($datos, 'usuarios');
+
+        if($respuesta){
+            echo 1;
+        }else{
+            echo 0;
+        }
+
     }
 
 }

@@ -8,7 +8,7 @@
 ?>
 <h1>EDITAR USUARIO</h1>
 
-<form method="post">
+<form method="post" onsubmit="return ValidarEditar()">
 
 	<?php 
 		$editar = new MvcController();

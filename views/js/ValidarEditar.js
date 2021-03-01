@@ -1,12 +1,14 @@
 ;
 /*********************************************
-VALIDAR INGRESO 
+VALIDAR EDITAR 
 *********************************************/
 
-function ValidarIngreso(){
 
-    let usuario = document.querySelector('#usuarioIngreso').value
-    let password = document.querySelector('#passwordIngreso').value
+function ValidarEditar(){
+
+    let usuario = document.querySelector('#usuarioEditar').value
+    let password = document.querySelector('#passwordEditar').value
+    let email = document.querySelector('#emailEditar').value
     
     if( usuario != '' ){
         let caracteres = usuario.length
@@ -22,8 +24,9 @@ function ValidarIngreso(){
         if( !expresion.test(usuario) ){
 
             document.querySelector("#usuario").innerHTML = "<br>No puede utilizar caracteres especiales ni espacios en blanco."
-            usuario = document.querySelector('#usuarioIngreso').value = usuario
-            password = document.querySelector('#passwordIngreso').value = password
+            usuario = document.querySelector('#usuarioEditar').value = usuario
+            password = document.querySelector('#passwordEditar').value = password
+            email = document.querySelector('#emailEditar').value = email
             return false;
         }  
     }
@@ -43,13 +46,32 @@ function ValidarIngreso(){
 
             document.querySelector("#password").innerHTML = "<br>La contraseña debe contener al menos 1 Mayúscula un signo y letras minusculas"
 
-            usuario = document.querySelector('#usuarioIngreso').value = usuario
-            password = document.querySelector('#passwordIngreso').value = password
+            usuario = document.querySelector('#usuarioEditar').value = usuario
+            password = document.querySelector('#passwordEditar').value = password
+            email = document.querySelector('#emailEditar').value = email
 
             return false;
         }
         
     }
 
+    if( email != '' ){
+
+        //VALIDAR UTILIZANDO EXPRESIONES REGULARES
+        let expresion = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,4})+$/;               
+        
+        if( !expresion.test(email) ){
+
+            document.querySelector("#email").innerHTML = "<br>El email debe poseer un formato valido"
+
+            usuario = document.querySelector('#usuarioEditar').value = usuario
+            password = document.querySelector('#passwordEditar').value = password
+            email = document.querySelector('#emailEditar').value = email
+
+            return false;
+        }
+        
+    }
     return true;
+
 }
