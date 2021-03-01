@@ -1,0 +1,11 @@
+#IMPEDIR QUE SE PUEDA VER EL LISTADO DE CONTENIDOS DE UN DIRECTORIO
+
+Options All -Indexes
+
+#URL AMIGABLES
+#ES NECESARIO ACTIVAR EL RewriteEngine
+
+RewriteEngine on
+
+# REEMPLAZAMOS LA VARIABLE GET POR index.php?action=$1 + LA VARIABLE GET
+RewriteRule ^(\w+)$ index.php?action=$1
